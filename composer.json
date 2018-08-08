@@ -1,6 +1,6 @@
 {
     "name": "jasny/application-env",
-    "description": "",
+    "description": "Logic around the APPLICATION_ENV environment variable",
     "keywords": [],
     "license": "MIT",
     "authors": [
@@ -15,7 +15,7 @@
         "source": "https://github.com/jasny/application-env"
     },
     "require": {
-        "php": ">=7.0.0"
+        "php": ">=7.1.0"
     },
     "require-dev": {
         "jasny/php-code-quality": "^2.0"
