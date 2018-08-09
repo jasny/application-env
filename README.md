@@ -1,4 +1,4 @@
-Jasny APPLICATION_ENV logic
+Jasny ApplicationEnv
 ===
 
 [![Build Status](https://travis-ci.org/jasny/application-env.svg?branch=master)](https://travis-ci.org/jasny/{{library}})
@@ -11,7 +11,7 @@ Jasny APPLICATION_ENV logic
 
 Logic around the common `APPLICATION_ENV` environment variable.
 
-Practicle when using sub-environments like `dev.testers.john`.
+Check and process dot-separated sub-environments like `dev.testers.john`.
 
 Installation
 ---
@@ -38,6 +38,8 @@ if ($env->is("dev")) {
    ini_set('display_errors', true);
 }
 ```
+
+This would match `dev` and `dev.testers.john`, but not `staging` or `prod.worker`.
 
 ### Get levels
 
@@ -69,4 +71,3 @@ $configFiles = $env->getLevels(0, null, function(string $env) {
     return $env === '' ? "settings.{$env}.yml" : "settings.yml";
 });
 ```
-
