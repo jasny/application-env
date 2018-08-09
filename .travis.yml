@@ -33,5 +33,5 @@ script:
   - vendor/bin/phpunit --coverage-clover cache/logs/clover.xml $PHPUNIT_FLAGS
 
 after_success:
-  - ["$TRAVIS_PHP_VERSION" == "nightly"] || php "$HOME/ocular.phar" code-coverage:upload --format=php-clover cache/logs/clover.xml
+  - test "$TRAVIS_PHP_VERSION" == "nightly" || php "$HOME/ocular.phar" code-coverage:upload --format=php-clover cache/logs/clover.xml
 
