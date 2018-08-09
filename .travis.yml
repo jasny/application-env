@@ -25,10 +25,13 @@ before_install:
 install:
   - composer install --prefer-source $COMPOSER_FLAGS
   - wget https://scrutinizer-ci.com/ocular.phar -O "$HOME/ocular.phar"
-  
+
+before_script:
+  - export PHPUNIT_FLAGS=$(test "$TRAVIS_PHP_VERSION" == "nightly" && echo "--no-coverage")
+
 script:
-  - vendor/bin/phpunit --coverage-clover cache/logs/clover.xml
+  - vendor/bin/phpunit --coverage-clover cache/logs/clover.xml $PHPUNIT_FLAGS
 
 after_success:
-  - php "$HOME/ocular.phar" code-coverage:upload --format=php-clover cache/logs/clover.xml
+  - ["$TRAVIS_PHP_VERSION" == "nightly"] || php "$HOME/ocular.phar" code-coverage:upload --format=php-clover cache/logs/clover.xml
 
