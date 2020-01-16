@@ -15,11 +15,11 @@
         "source": "https://github.com/jasny/application-env"
     },
     "require": {
-        "php": ">=7.1.0",
-        "jasny/php-functions": "^3.3"
+        "php": ">=7.2.0",
+        "jasny/php-functions": "^3.3|^4.0"
     },
     "require-dev": {
-        "jasny/php-code-quality": "^2.0"
+        "jasny/php-code-quality": "2.3.*"
     },
     "autoload": {
         "psr-4": {
