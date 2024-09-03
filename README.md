@@ -1,11 +1,11 @@
-Jasny ApplicationEnv
+![jasny-banner](https://user-images.githubusercontent.com/100821/62123924-4c501c80-b2c9-11e9-9677-2ebc21d9b713.png)
+
+ApplicationEnv
 ===
 
-[![Build Status](https://travis-ci.org/jasny/application-env.svg?branch=master)](https://travis-ci.org/jasny/application-env)
+[![Build Status](https://github.com/jasny/application-env/actions/workflows/php.yml/badge.svg)](https://github.com/jasny/application-env/actions/workflows/php.yml)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/jasny/application-env/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/jasny/application-env/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/jasny/application-env/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/jasny/application-env/?branch=master)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/6c5ec45d-5570-4e50-87ce-39cabc237f2b/mini.png)](https://insight.sensiolabs.com/projects/6c5ec45d-5570-4e50-87ce-39cabc237f2b)
-[![BCH compliance](https://bettercodehub.com/edge/badge/jasny/application-env?branch=master)](https://bettercodehub.com/)
 [![Packagist Stable Version](https://img.shields.io/packagist/v/jasny/application-env.svg)](https://packagist.org/packages/jasny/application-env)
 [![Packagist License](https://img.shields.io/packagist/l/jasny/application-env.svg)](https://packagist.org/packages/jasny/application-env)
 
@@ -67,7 +67,8 @@ If the `APPLICATION_ENV` is `dev.testers.john` than `getLevels()` would yield;
 To create a list of configuration files to be considered, you might use
 
 ```php
-$configFiles = $env->getLevels(0, null, function(string $env) {
-    return $env === '' ? "settings.{$env}.yml" : "settings.yml";
-});
+$configFiles = $env->getLevels(
+  from: 0,
+  callback: fn(string $env) => $env === '' ? "settings.{$env}.yml" : "settings.yml"
+);
 ```

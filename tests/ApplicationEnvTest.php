@@ -3,26 +3,24 @@
 namespace Jasny\Tests;
 
 use Jasny\ApplicationEnv;
-use PHPStan\Testing\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
 
 class ApplicationEnvTest extends TestCase
 {
-    /**
-     * @var ApplicationEnv
-     */
-    protected $env;
+    protected ApplicationEnv $env;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->env = new ApplicationEnv("dev.testers.john");
     }
 
-    public function testToString()
+    public function testToString(): void
     {
         $this->assertEquals("dev.testers.john", (string)$this->env);
     }
 
-    public function testIs()
+    public function testIs(): void
     {
         $this->assertTrue($this->env->is('dev'));
         $this->assertTrue($this->env->is('dev.testers'));
@@ -34,7 +32,7 @@ class ApplicationEnvTest extends TestCase
         $this->assertFalse($this->env->is('dev.test'));
     }
 
-    public function levelProvider()
+    public static function levelProvider(): array
     {
         return [
             [1, null, ['dev', 'dev.testers', 'dev.testers.john']],
@@ -49,17 +47,15 @@ class ApplicationEnvTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider levelProvider
-     */
-    public function testGetLevels(int $from, ?int $to, array $expected)
+    #[DataProvider('levelProvider')]
+    public function testGetLevels(int $from, ?int $to, array $expected): void
     {
         $levels = $this->env->getLevels($from, $to);
 
         $this->assertEquals($expected, $levels);
     }
 
-    public function testGetLevelsCallback()
+    public function testGetLevelsCallback(): void
     {
         $expected = [
             'settings.yml',
@@ -68,9 +64,7 @@ class ApplicationEnvTest extends TestCase
             'settings.dev.testers.john.yml'
         ];
 
-        $levels = $this->env->getLevels(0, null, function($env) {
-            return $env === '' ? "settings.yml" : "settings.{$env}.yml";
-        });
+        $levels = $this->env->getLevels(0, null, fn($env) => $env === '' ? "settings.yml" : "settings.$env.yml");
 
         $this->assertSame($expected, $levels);
     }

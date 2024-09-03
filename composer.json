@@ -1,39 +1,49 @@
 {
-    "name": "jasny/application-env",
-    "description": "Logic around the APPLICATION_ENV environment variable",
-    "keywords": [],
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Arnold Daniels",
-            "email": "arnold@jasny.net",
-            "homepage": "http://www.jasny.net"
-        }
-    ],
-    "support": {
-        "issues": "https://github.com/jasny/application-env/issues",
-        "source": "https://github.com/jasny/application-env"
-    },
-    "require": {
-        "php": ">=7.2.0",
-        "jasny/php-functions": "^3.3|^4.0"
-    },
-    "require-dev": {
-        "jasny/php-code-quality": "2.3.*"
-    },
-    "autoload": {
-        "psr-4": {
-            "Jasny\\": "src/"
-        }
-    },
-    "scripts": {
-        "test": [
-            "phpunit",
-            "phpcs -p",
-            "phpstan analyse"
-        ]
-    },
-    "scripts-descriptions": {
-        "test": "Run all tests and quality checks"
+  "name": "jasny/application-env",
+  "description": "Logic around the APPLICATION_ENV environment variable",
+  "keywords": [],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Arnold Daniels",
+      "email": "arnold@jasny.net",
+      "homepage": "https://www.jasny.net"
     }
+  ],
+  "support": {
+    "issues": "https://github.com/jasny/application-env/issues",
+    "source": "https://github.com/jasny/application-env"
+  },
+  "require": {
+    "php": ">=8.1.0"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^1.12",
+    "phpunit/phpunit": ">= 10.5, < 12",
+    "squizlabs/php_codesniffer": "^3.10"
+  },
+  "autoload": {
+    "psr-4": {
+      "Jasny\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Jasny\\Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "test": [
+      "phpstan analyse",
+      "XDEBUG_MODE=coverage phpunit --testdox --colors=always --coverage-text",
+      "phpcs -p src"
+    ]
+  },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "optimize-autoloader": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }

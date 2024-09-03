@@ -6,19 +6,14 @@ namespace Jasny;
 
 /**
  * Logic around APPLICATION_ENV environment variable
- * Supports sub-environements separated by a dot.
+ * Supports sub-environments separated by a dot.
  */
 class ApplicationEnv
 {
-    /**
-     * @var string
-     */
-    protected $env;
+    protected string $env;
 
     /**
      * ApplicationEnv constructor.
-     *
-     * @param string $env
      */
     public function __construct(string $env)
     {
@@ -27,8 +22,6 @@ class ApplicationEnv
 
     /**
      * Cast object to a string
-     *
-     * @return string
      */
     public function __toString(): string
     {
@@ -38,9 +31,6 @@ class ApplicationEnv
 
     /**
      * Check if environment matches or is a parent.
-     *
-     * @param string $env
-     * @return bool
      */
     public function is(string $env): bool
     {
@@ -50,10 +40,7 @@ class ApplicationEnv
     /**
      * Traverse through each level of the application env.
      *
-     * @param int           $from
-     * @param int|null      $to
-     * @param callable|null $callback
-     * @return array
+     * @return array<mixed>
      */
     public function getLevels(int $from = 1, ?int $to = null, ?callable $callback = null): array
     {
